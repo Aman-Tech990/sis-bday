@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Little Universe Made for You — Sweety</title>
+
+    <!-- Google Fonts: Editorial Serif, Handwritten Script & Clean UI Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="intro-locked">
+    <!-- Subtle Paper & Film Grain Overlay -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Desktop Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    <!-- Ambient Floating Petals & Dust Layer -->
+    <canvas id="ambientCanvas" aria-hidden="true"></canvas>
+
+    <!-- =========================================================
+       1. THE GRAND INTRODUCTION (OPENING SCREEN)
+  ========================================================== -->
+    <section id="introOverlay" class="intro-overlay" aria-label="Opening Introduction">
+        <canvas id="introStarCanvas" aria-hidden="true"></canvas>
+        <div class="intro-vignette" aria-hidden="true"></div>
+
+        <div class="intro-content">
+            <p class="intro-line line-1" id="introLine1">
+                Some people make life beautiful just by being in it.
+            </p>
+            <p class="intro-line line-2" id="introLine2">
+                And for me, that person has always been you.
+            </p>
+            <h1 class="intro-name" id="introName">Sweety</h1>
+            <button type="button" id="enterUniverseBtn" class="btn-celestial">
+                <span>Enter your little universe ✨</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- =========================================================
+       FLOATING NAVIGATION DOCK
+  ========================================================== -->
+    <nav class="floating-nav" id="floatingNav" aria-label="Chapters">
+        <a href="#hero">Beginning</a>
+        <a href="#memory-lane">Memories</a>
+        <a href="#unsaid">Unsaid</a>
+        <a href="#little-things">Reasons</a>
+        <a href="#chaos">Chaos</a>
+        <a href="#letter">Letter</a>
+        <a href="#wishing-sky">Wishes</a>
+    </nav>
+
+    <!-- =========================================================
+       MAIN DIGITAL UNIVERSE
+  ========================================================== -->
+    <main id="mainUniverse" class="main-universe">
+
+        <!-- 2. HERO SECTION -->
+        <header id="hero" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-editorial-text" data-reveal>
+                    <div class="love-badge">
+                        <span class="pulse-dot"></span>
+                        <span>Made with love, just for you</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        To my forever<br />
+                        <em>favorite human.</em>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        A little collection of memories, laughter, love, and everything I can never fully put into
+                        words.
+                    </p>
+
+                    <div class="hero-signature">
+                        <span class="handwritten-note">For Sweety — always your brother</span>
+                    </div>
+                </div>
+
+                <div class="hero-visual-stage" id="heroParallaxStage" data-reveal>
+                    <div class="hero-arch-frame" data-depth="18">
+                        <div class="hero-arch-glow"></div>
+                        <img id="heroMainImg" src="assets/photos/photo1.jpg" alt="Us smiling together"
+                            class="hero-main-photo" />
+                        <span class="frame-caption handwritten-note">Us, always in the same corner.</span>
+                    </div>
+
+                    <div class="hero-floating-polaroid" data-depth="32">
+                        <img id="heroSecondaryImg" src="assets/photos/photo2.jpg" alt="A candid portrait" />
+                        <p class="handwritten-note">Main character energy ✨</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#memory-lane" class="scroll-indicator" aria-label="Scroll down to Memory Lane">
+                <span class="scroll-text">Scroll to explore</span>
+                <span class="scroll-line"></span>
+            </a>
+        </header>
+
+        <!-- 3. OUR MEMORY LANE — INTERACTIVE SCRAPBOOK GALLERY -->
+        <section id="memory-lane" class="section-scrapbook">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="eyebrow">Chapter I · Scrapbook</span>
+                    <h2 class="section-title">Our Memory Lane</h2>
+                    <p class="section-lead">
+                        Unfiltered moments, terrible jokes, and snapshots I never want to lose. Click any photograph to
+                        step inside the memory.
+                    </p>
+                </div>
+
+                <!-- Filter Pills -->
+                <div class="gallery-filters" role="tablist" aria-label="Filter memories" data-reveal>
+                    <button class="filter-pill active" data-filter="all">All Moments</button>
+                    <button class="filter-pill" data-filter="together">Us Together</button>
+                    <button class="filter-pill" data-filter="portraits">Just You</button>
+                    <button class="filter-pill" data-filter="throwback">Throwbacks</button>
+                </div>
+
+                <!-- Asymmetric Editorial Scrapbook Grid (Populated via JS) -->
+                <div class="scrapbook-canvas" id="scrapbookGallery"></div>
+
+                <!-- Nostalgic Film Strip -->
+                <div class="filmstrip-wrapper" data-reveal>
+                    <div class="filmstrip-label">
+                        <span class="handwritten-note">35mm Strip · Unrehearsed &amp; Unforgettable</span>
+                    </div>
+                    <div class="filmstrip-track" id="filmstripTrack"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. "THINGS I NEVER SAY ENOUGH" -->
+        <section id="unsaid" class="section-unsaid">
+            <div class="unsaid-backdrop" aria-hidden="true"></div>
+            <div class="container narrow-container">
+                <span class="eyebrow light" data-reveal>Chapter II · Quiet Truths</span>
+                <h2 class="section-title light" data-reveal>Things I Never Say Enough</h2>
+
+                <div class="unsaid-stream" id="unsaidStream">
+                    <p class="unsaid-line">I might not say it every day...</p>
+                    <p class="unsaid-line">But I am genuinely grateful that I got you as my sister.</p>
+                    <p class="unsaid-line">
+                        Thank you for every laugh, every little fight, every moment you stood by me, and every memory
+                        that became a part of who I am.
+                    </p>
+                    <p class="unsaid-line">
+                        Even when we annoy each other, even when we disagree, and even when life gets busy...
+                    </p>
+                    <p class="unsaid-line highlight">
+                        You will always have a special place in my heart that nobody else could ever replace.
+                    </p>
+                    <p class="unsaid-line">
+                        Having you in my life is a blessing I will never take for granted.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. THE LITTLE THINGS I LOVE ABOUT YOU -->
+        <section id="little-things" class="section-reasons">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="eyebrow">Chapter III · Little Notes</span>
+                    <h2 class="section-title">Reasons you're one of my favorite people on this planet.</h2>
+                    <p class="section-lead">
+                        Tap any sealed note card below to uncover a reason.
+                    </p>
+                </div>
+
+                <div class="reasons-grid" id="reasonsGrid"></div>
+
+                <div class="reasons-controls" data-reveal>
+                    <button type="button" id="revealAllReasonsBtn" class="btn-subtle">
+                        Open all notes at once
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. A LITTLE CHAOS — FUN SISTER INTERACTIONS -->
+        <section id="chaos" class="section-chaos">
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="eyebrow">Chapter IV · Sibling Reality Check</span>
+                    <h2 class="section-title">Let's be honest... you're not always innocent.</h2>
+                    <p class="section-lead">
+                        Before we get too emotional, let’s acknowledge the daily drama.
+                    </p>
+                </div>
+
+                <div class="chaos-bento">
+                    <!-- A) Expose a Memory -->
+                    <article class="chaos-card" data-reveal>
+                        <div class="chaos-tag">Exhibit A</div>
+                        <h3>Sibling Truth Machine</h3>
+                        <p class="chaos-desc">Press the button for an unfiltered, scientifically accurate observation.
+                        </p>
+                        <div class="chaos-output-box" id="roastDisplay">
+                            <p class="handwritten-note">Waiting to expose the truth...</p>
+                        </div>
+                        <button type="button" id="exposeMemoryBtn" class="btn-rose">
+                            Expose a memory
+                        </button>
+                    </article>
+
+                    <!-- B) Who is more annoying? Quiz -->
+                    <article class="chaos-card" data-reveal>
+                        <div class="chaos-tag">Exhibit B</div>
+                        <h3>Who is more annoying?</h3>
+                        <p class="chaos-desc">Answer honestly. The universe is watching.</p>
+                        <div class="quiz-options" id="quizOptions">
+                            <button type="button" class="quiz-choice" data-choice="sister">Definitely you
+                                (Sweety)</button>
+                            <button type="button" class="quiz-choice" data-choice="brother">Me (impossible, I'm an
+                                angel)</button>
+                            <button type="button" class="quiz-choice" data-choice="both">Both of us together</button>
+                        </div>
+                        <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+                    </article>
+
+                    <!-- C) Miss our old days -->
+                    <article class="chaos-card nostalgic-card" id="nostalgiaCard" data-reveal>
+                        <div class="chaos-tag">Exhibit C</div>
+                        <h3>Time Machine</h3>
+                        <p class="chaos-desc">Feeling nostalgic about childhood evenings and zero responsibilities?</p>
+                        <button type="button" id="oldDaysBtn" class="btn-gold">
+                            Press this if you miss our old days
+                        </button>
+                        <div class="nostalgia-reveal" id="nostalgiaReveal" hidden>
+                            <p class="nostalgia-quote">
+                                "From tiny bow clips and silly arguments over nothing to growing up side by side — I’d
+                                still pick being your brother in every lifetime."
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- D) Random Memory Caption Generator -->
+                    <article class="chaos-card" data-reveal>
+                        <div class="chaos-tag">Exhibit D</div>
+                        <h3>Instant Photo Caption</h3>
+                        <p class="chaos-desc">Need a caption for our next chaotic selfie?</p>
+                        <div class="chaos-output-box" id="captionDisplay">
+                            <p class="handwritten-note">"Partners in crime since day one."</p>
+                        </div>
+                        <button type="button" id="randomCaptionBtn" class="btn-subtle">
+                            Generate random memory caption
+                        </button>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. A DIGITAL LETTER -->
+        <section id="letter" class="section-letter">
+            <div class="letter-atmosphere" id="letterAtmosphere" aria-hidden="true"></div>
+            <div class="container">
+                <div class="section-header" data-reveal>
+                    <span class="eyebrow">Chapter V · Handwritten</span>
+                    <h2 class="section-title">Something I wanted you to know...</h2>
+                    <p class="section-lead">Click the wax seal to open the envelope.</p>
+                </div>
+
+                <div class="envelope-stage" data-reveal>
+                    <div class="envelope-wrapper" id="envelopeWrapper" role="button" tabindex="0" aria-expanded="false"
+                        aria-label="Open personal letter">
+                        <div class="envelope-back"></div>
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-pocket"></div>
+                        <div class="wax-seal" aria-hidden="true">
+                            <span>S</span>
+                        </div>
+                        <p class="envelope-hint">Tap to break the seal</p>
+                    </div>
+
+                    <article class="letter-paper" id="letterPaper" aria-hidden="true">
+                        <button type="button" class="letter-close-btn" id="closeLetterBtn"
+                            aria-label="Fold letter back">
+                            Fold letter ×
+                        </button>
+                        <div class="letter-date">Written from the heart</div>
+                        <h3 class="letter-salutation">Dear Sweety,</h3>
+                        <div class="letter-body">
+                            <p>
+                                We don’t really sit down and have big emotional conversations, mostly because five
+                                minutes into any serious talk one of us starts laughing or teasing the other. So I
+                                wanted to write this down where you can keep it and read it whenever you need a
+                                reminder.
+                            </p>
+                            <p>
+                                Having you as my sister is genuinely one of the best parts of my life. When I look back
+                                at all our photos — from when you were tiny with a pink ribbon in your hair to watching
+                                you grow into the strong, warm, radiant person you are today — I feel so proud of you.
+                            </p>
+                            <p>
+                                Thank you for being there in the small, ordinary moments: the random late-evening talks,
+                                the shared laughter over things nobody else finds funny, and the quiet comfort of just
+                                knowing you’re in my corner.
+                            </p>
+                            <p>
+                                Life is going to take us through busy schedules, new cities, and big chapters, but I
+                                want you to be completely certain of one thing: no matter where you go or what you face,
+                                you always have a brother standing right behind you. You never have to carry heavy days
+                                alone.
+                            </p>
+                            <p>
+                                You deserve a life filled with genuine peace, loud laughter, people who value your
+                                kindness, and every dream you’re brave enough to chase.
+                            </p>
+                        </div>
+                        <div class="letter-signoff">
+                            <p>Always cheering for you,</p>
+                            <p class="handwritten-signature">Your Brother</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. A WISHING SKY — INTERACTIVE WISHES -->
+        <section id="wishing-sky" class="section-wishing-sky">
+            <canvas id="wishingCanvas" aria-hidden="true"></canvas>
+            <div class="container wishing-container">
+                <div class="section-header" data-reveal>
+                    <span class="eyebrow light">Chapter VI · Constellation</span>
+                    <h2 class="section-title light">Make a wish. You deserve a thousand beautiful things.</h2>
+                    <p class="section-lead light">
+                        Click on the glowing stars and shooting stars across the night sky to catch a wish written for
+                        you.
+                    </p>
+                </div>
+
+                <!-- Interactive Star Map -->
+                <div class="sky-stage" id="skyStage" aria-label="Interactive Wishing Sky"></div>
+
+                <!-- Revealed Wish Card -->
+                <div class="wish-toast" id="wishToast" aria-live="polite">
+                    <span class="wish-star-icon">✦</span>
+                    <p id="wishText">Touch any glowing star in the sky above...</p>
+                    <span class="wish-counter" id="wishCounter">0 / 12 wishes discovered</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. OUR PHOTO — THE HEART OF THE WEBSITE -->
+        <section id="our-photo" class="section-centerpiece">
+            <div class="container">
+                <div class="centerpiece-layout" data-reveal>
+                    <p class="centerpiece-top-quote">
+                        “Different paths, countless memories, one bond that will always remain.”
+                    </p>
+
+                    <div class="centerpiece-frame">
+                        <div class="shimmer-sweep" aria-hidden="true"></div>
+                        <img id="centerpieceImg" src="assets/photos/photo3.jpg"
+                            alt="Brother and sister smiling outdoors together" class="centerpiece-photo" />
+                    </div>
+
+                    <p class="centerpiece-bottom-promise">
+                        Whatever happens in life, you will never have to face it alone. I will always be your brother.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. A SURPRISE BUTTON -->
+        <section id="surprise-trigger-section" class="section-surprise-trigger">
+            <div class="container" data-reveal>
+                <p class="surprise-pretext">Before you scroll to the end...</p>
+                <button type="button" id="surpriseBtn" class="btn-surprise">
+                    <span>There's one more thing... don't leave yet.</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 11. THE FINAL SCREEN -->
+        <footer id="final-screen" class="section-final">
+            <div class="final-golden-glow" aria-hidden="true"></div>
+            <div class="container final-container" data-reveal>
+                <div class="final-portrait-oval">
+                    <img id="finalPhotoImg" src="assets/photos/photo6.jpg" alt="Sweety celebrating with a cake" />
+                </div>
+
+                <blockquote class="final-poem">
+                    Through every season of life,<br />
+                    through every change,<br />
+                    through every new chapter...<br /><br />
+                    You'll always be my sister.<br />
+                    And I'll always be here.<br /><br />
+                    <em>Love you. Always.</em>
+                </blockquote>
+
+                <p class="final-credit">Made with endless love ❤️</p>
+
+                <button type="button" id="replayBtn" class="btn-celestial">
+                    <span>Relive our memories</span>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+    <!-- =========================================================
+       FULLSCREEN PHOTO LIGHTBOX
+  ========================================================== -->
+    <div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-label="Memory Photo Viewer">
+        <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close gallery">×</button>
+        <button type="button" class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
+        <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next photo">›</button>
+
+        <figure class="lightbox-figure">
+            <img id="lightboxImg" src="" alt="" />
+            <figcaption class="lightbox-caption-box">
+                <span class="lightbox-date" id="lightboxDate"></span>
+                <p class="lightbox-caption" id="lightboxCaption"></p>
+                <span class="lightbox-counter" id="lightboxCounter"></span>
+            </figcaption>
+        </figure>
+    </div>
+
+    <!-- =========================================================
+       FULLSCREEN SURPRISE MODAL SEQUENCE
+  ========================================================== -->
+    <div class="surprise-modal" id="surpriseModal" role="dialog" aria-modal="true" aria-hidden="true"
+        aria-label="Special Surprise">
+        <canvas id="surpriseParticlesCanvas" aria-hidden="true"></canvas>
+        <button type="button" class="surprise-close" id="closeSurpriseBtn" aria-label="Close surprise">×</button>
+
+        <div class="surprise-stage">
+            <div class="surprise-photo-card">
+                <img id="surprisePhotoImg" src="assets/photos/photo5.jpg" alt="Our special memory together" />
+            </div>
+            <div class="surprise-message-panel">
+                <span class="eyebrow light">A Hidden Keepsake</span>
+                <h2 class="surprise-headline">If I had to choose a sister all over again...</h2>
+                <p class="surprise-body">
+                    I wouldn’t change a single laugh, a single late-night argument, or a single memory. Thank you for
+                    being my constant, my loudest supporter, and the heart of our family.
+                </p>
+                <p class="surprise-final-note handwritten-note">
+                    Keep shining, Sweety. The best chapters of your life are still ahead. ✨
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+       FLOATING MUSIC PLAYER ("Behna Meri Pyari")
+  ========================================================== -->
+    <aside class="music-dock" id="musicDock" aria-label="Background Music Player">
+        <audio id="bgAudio" preload="metadata" loop>
+            <source src="assets/behna-meri-pyari.mp3" type="audio/mpeg" />
+        </audio>
+
+        <button type="button" id="musicPlayBtn" class="music-btn" aria-label="Play or pause music" title="Play / Pause">
+            <span id="playIcon">▶</span>
+        </button>
+
+        <div class="music-meta">
+            <div class="music-title-row">
+                <span class="music-track-name" id="musicTrackName">Behna Meri Pyari</span>
+                <span class="music-time" id="musicTime">0:00 / 0:00</span>
+            </div>
+            <input type="range" id="musicProgress" class="music-progress" value="0" min="0" max="100" step="0.1"
+                aria-label="Music progress" />
+        </div>
+
+        <button type="button" id="musicMuteBtn" class="music-btn small" aria-label="Mute or unmute"
+            title="Mute / Unmute">
+            <span id="muteIcon">🔊</span>
+        </button>
+    </aside>
+
+    <!-- Back to Top Control -->
+    <button type="button" id="backToTopBtn" class="back-to-top" aria-label="Back to top" title="Back to top">
+        ↑
+    </button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
